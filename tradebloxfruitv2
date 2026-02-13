@@ -1,0 +1,165 @@
+local Players = game:GetService("Players")
+local TeleportService = game:GetService("TeleportService")
+local LocalPlayer = Players.LocalPlayer
+local TweenService = game:GetService("TweenService")
+
+-- GUI chính
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "TradeScamGUI"
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+-- Frame chính
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 240, 0, 200)
+MainFrame.Position = UDim2.new(0.5, -120, 0.5, -100)
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+MainFrame.BorderSizePixel = 0
+MainFrame.Active = true
+MainFrame.Draggable = true
+MainFrame.Parent = ScreenGui
+Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 10)
+Instance.new("UIStroke", MainFrame).Color = Color3.fromRGB(60, 60, 60)
+
+-- Tiêu đề
+local Title = Instance.new("TextLabel")
+Title.Parent = MainFrame
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.Text = "Trade Scam Blox fruit"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 18
+
+-- Footer
+local Footer = Instance.new("TextLabel")
+Footer.Parent = MainFrame
+Footer.Size = UDim2.new(1, 0, 0, 16)
+Footer.Position = UDim2.new(0, 0, 1, -16)
+Footer.Text = "--Script By Mrbeeder--"
+Footer.TextColor3 = Color3.fromRGB(150, 150, 150)
+Footer.BackgroundTransparency = 1
+Footer.Font = Enum.Font.Gotham
+Footer.TextSize = 11
+
+-- Inner Frame (Trade Scam)
+local InnerFrame = Instance.new("Frame")
+InnerFrame.Parent = MainFrame
+InnerFrame.Size = UDim2.new(0, 200, 0, 50)
+InnerFrame.Position = UDim2.new(0.5, -100, 0, 35)
+InnerFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+InnerFrame.BorderSizePixel = 0
+Instance.new("UICorner", InnerFrame).CornerRadius = UDim.new(0, 8)
+
+-- Label Trade Scam
+local Label = Instance.new("TextLabel")
+Label.Parent = InnerFrame
+Label.Size = UDim2.new(1, -60, 1, 0)
+Label.Position = UDim2.new(0, 10, 0, 0)
+Label.Text = "Tradding Roblxo Game Blox Fruit"
+Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+Label.BackgroundTransparency = 1
+Label.Font = Enum.Font.GothamMedium
+Label.TextSize = 16
+Label.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Toggle background
+local ToggleFrame = Instance.new("Frame")
+ToggleFrame.Parent = InnerFrame
+ToggleFrame.Size = UDim2.new(0, 46, 0, 22)
+ToggleFrame.Position = UDim2.new(1, -56, 0.5, -11)
+ToggleFrame.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+ToggleFrame.BorderSizePixel = 0
+Instance.new("UICorner", ToggleFrame).CornerRadius = UDim.new(1, 0)
+
+-- Knob
+local Knob = Instance.new("Frame")
+Knob.Parent = ToggleFrame
+Knob.Size = UDim2.new(0, 18, 0, 18)
+Knob.Position = UDim2.new(0, 2, 0, 2)
+Knob.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Knob.BorderSizePixel = 0
+Instance.new("UICorner", Knob).CornerRadius = UDim.new(1, 0)
+
+-- Transparent button
+local ClickButton = Instance.new("TextButton")
+ClickButton.Parent = ToggleFrame
+ClickButton.BackgroundTransparency = 1
+ClickButton.Size = UDim2.new(1, 0, 1, 0)
+ClickButton.Text = ""
+
+-- Toggle logic
+local ToggleOn = false
+local function ToggleSwitch()
+	ToggleOn = not ToggleOn
+	local bgColor = ToggleOn and Color3.fromRGB(0, 170, 0) or Color3.fromRGB(150, 0, 0)
+	local knobPos = ToggleOn and UDim2.new(1, -20, 0, 2) or UDim2.new(0, 2, 0, 2)
+	TweenService:Create(ToggleFrame, TweenInfo.new(0.2), {BackgroundColor3 = bgColor}):Play()
+	TweenService:Create(Knob, TweenInfo.new(0.2), {Position = knobPos}):Play()
+end
+ClickButton.MouseButton1Click:Connect(ToggleSwitch)
+
+-- Finding Pet label + TextBox
+local PetLabel = Instance.new("TextLabel")
+PetLabel.Parent = MainFrame
+PetLabel.Size = UDim2.new(0, 100, 0, 25)
+PetLabel.Position = UDim2.new(0, 15, 0, 100)
+PetLabel.Text = "Finding Fruit:"
+PetLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+PetLabel.BackgroundTransparency = 1
+PetLabel.Font = Enum.Font.Gotham
+PetLabel.TextSize = 14
+PetLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local PetBox = Instance.new("TextBox")
+PetBox.Parent = MainFrame
+PetBox.Size = UDim2.new(0, 100, 0, 25)
+PetBox.Position = UDim2.new(1, -115, 0, 100)
+PetBox.PlaceholderText = "Enter Fruit"
+PetBox.Text = ""
+PetBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+PetBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+PetBox.Font = Enum.Font.Gotham
+PetBox.TextSize = 14
+Instance.new("UICorner", PetBox).CornerRadius = UDim.new(0, 6)
+
+-- Rejoin Button
+local RejoinBtn = Instance.new("TextButton")
+RejoinBtn.Parent = MainFrame
+RejoinBtn.Size = UDim2.new(0, 120, 0, 30)
+RejoinBtn.Position = UDim2.new(0.5, -60, 1, -50)
+RejoinBtn.Text = "Server Hop"
+RejoinBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+RejoinBtn.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+RejoinBtn.Font = Enum.Font.GothamBold
+RejoinBtn.TextSize = 14
+Instance.new("UICorner", RejoinBtn).CornerRadius = UDim.new(0, 8)
+
+-- Logic rejoin  
+RejoinBtn.MouseButton1Click:Connect(function()  
+	if PetBox.Text == "" then  
+		-- popup thông báo  
+		local Popup = Instance.new("TextLabel")  
+		Popup.Parent = ScreenGui  
+		Popup.Size = UDim2.new(0, 220, 0, 50)  
+		Popup.Position = UDim2.new(0.5, -110, 0.5, -25)  
+		Popup.BackgroundColor3 = Color3.fromRGB(50, 50, 50)  
+		Popup.Text = "Please enter fruit you want"  
+		Popup.TextColor3 = Color3.fromRGB(255, 255, 255)  
+		Popup.Font = Enum.Font.GothamBold  
+		Popup.TextSize = 16  
+		Instance.new("UICorner", Popup).CornerRadius = UDim.new(0, 10)  
+
+		-- biến mất sau 5s  
+		game:GetService("Debris"):AddItem(Popup, 5)  
+	else  
+		-- đổi chữ và rejoin ngay  
+		RejoinBtn.Text = "Server hopping..."
+
+		local PlaceId = game.PlaceId  
+		local JobId = game.JobId  
+		TeleportService:TeleportToPlaceInstance(PlaceId, JobId, LocalPlayer)  
+	end  
+end)
