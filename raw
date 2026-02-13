@@ -1,0 +1,72 @@
+local player = game.Players.LocalPlayer
+
+-- GUI
+local gui = Instance.new("ScreenGui")
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.fromScale(0.4, 0.35)
+frame.Position = UDim2.fromScale(0.3, 0.32)
+frame.BackgroundColor3 = Color3.fromRGB(20,20,30)
+frame.BorderSizePixel = 0
+frame.AnchorPoint = Vector2.new(0,0)
+frame.ClipsDescendants = true
+frame.Name = "Loader"
+
+-- bo góc
+local corner = Instance.new("UICorner", frame)
+corner.CornerRadius = UDim.new(0,20)
+
+-- Avatar
+local avatar = Instance.new("ImageLabel", frame)
+avatar.Size = UDim2.fromScale(0.25,0.45)
+avatar.Position = UDim2.fromScale(0.375,0.15)
+avatar.BackgroundTransparency = 1
+avatar.Image = "rbxthumb://type=AvatarHeadShot&id="..player.UserId.."&w=420&h=420"
+
+-- Text
+local status = Instance.new("TextLabel", frame)
+status.Size = UDim2.fromScale(1,0.15)
+status.Position = UDim2.fromScale(0,0.62)
+status.Text = "Retrying injection (2/2)..."
+status.TextColor3 = Color3.fromRGB(220,220,220)
+status.BackgroundTransparency = 1
+status.Font = Enum.Font.Gotham
+status.TextScaled = true
+
+-- % text
+local percent = Instance.new("TextLabel", frame)
+percent.Size = UDim2.fromScale(1,0.12)
+percent.Position = UDim2.fromScale(0,0.74)
+percent.Text = "0%"
+percent.TextColor3 = Color3.fromRGB(0,140,255)
+percent.BackgroundTransparency = 1
+percent.Font = Enum.Font.GothamBold
+percent.TextScaled = true
+
+-- thanh nền
+local barBG = Instance.new("Frame", frame)
+barBG.Size = UDim2.fromScale(0.85,0.08)
+barBG.Position = UDim2.fromScale(0.075,0.88)
+barBG.BackgroundColor3 = Color3.fromRGB(40,40,60)
+barBG.BorderSizePixel = 0
+Instance.new("UICorner", barBG).CornerRadius = UDim.new(1,0)
+
+-- thanh chạy
+local bar = Instance.new("Frame", barBG)
+bar.Size = UDim2.fromScale(0,1)
+bar.BackgroundColor3 = Color3.fromRGB(0,140,255)
+bar.BorderSizePixel = 0
+Instance.new("UICorner", bar).CornerRadius = UDim.new(1,0)
+
+-- loading animation
+for i = 1, 100 do
+	bar.Size = UDim2.fromScale(i/100,1)
+	percent.Text = i.."%"
+	task.wait(0.03)
+end
+
+status.Text = "Injected Successfully!"
+task.wait(1)
+
+gui:Destroy()
